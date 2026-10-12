@@ -29,6 +29,7 @@ updateConnection();
  * Prefer a likely feminine English voice, then fall back
  * to an available English voice.
  */
+
 function chooseVoice() {
   if (!("speechSynthesis" in window)) {
     selectedVoice = null;
@@ -39,8 +40,8 @@ function chooseVoice() {
 
   const voices = window.speechSynthesis.getVoices();
 
-  const englishVoices = voices.filter((voice) =>
-    /^en([-_]|$)/i.test(voice.lang)
+  const englishVoices = voices.filter(voice =>
+    /^en[-_]/i.test(voice.lang)
   );
 
   const preferredNames = [
@@ -48,31 +49,48 @@ function chooseVoice() {
     "aria",
     "jenny",
     "zira",
-    "female",
-    "google uk english female",
-    "google us english"
+    "ava",
+    "allison",
+    "susan",
+    "google uk english female"
   ];
 
-  selectedVoice =
-    englishVoices.find((voice) => {
-      const name = voice.name.toLowerCase();
-      return preferredNames.some((preferred) =>
-        name.includes(preferred)
-      );
-    }) ||
-    englishVoices.find((voice) =>
-      /^en[-_]in$/i.test(voice.lang)
-    ) ||
-    englishVoices[0] ||
-    null;
+  selectedVoice = null;
+
+  for (const name of preferredNames) {
+    selectedVoice = englishVoices.find(voice =>
+      voice.name.toLowerCase().includes(name)
+    );
+
+    if (selectedVoice) break;
+  }
+
+  if (!selectedVoice) {
+    selectedVoice = englishVoices.find(voice =>
+      /female|woman/i.test(voice.name)
+    );
+  }
+
+  if (!selectedVoice) {
+    selectedVoice = englishVoices.find(voice =>
+      /^en[-_]IN$/i.test(voice.lang)
+    ) || englishVoices[0] || null;
+  }
 
   voiceToggle.disabled = !selectedVoice;
+
   voiceLabel.textContent = selectedVoice
     ? (voiceEnabled ? "Voice on" : "Voice off")
     : "Voice unavailable";
+
   voiceIcon.textContent = voiceEnabled ? "♫" : "♪";
-  voiceToggle.setAttribute("aria-pressed", String(voiceEnabled));
+
+  voiceToggle.setAttribute(
+    "aria-pressed",
+    String(voiceEnabled)
+  );
 }
+
 
 if ("speechSynthesis" in window) {
   chooseVoice();
@@ -105,9 +123,9 @@ function speak(text) {
 
   // Gentle starting settings; actual voice quality depends
   // on the voice engine installed on the device.
-  utterance.rate = 0.90;
-  utterance.pitch = 1.08;
-  utterance.volume = 0.85;
+  utterance.rate = 0.88;
+  utterance.pitch = 1.12;
+  utterance.volume = 0.90;
 
   utterance.onstart = () => {
     stopButton.hidden = false;
