@@ -1,1 +1,111 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090d18">
+  <meta name="description" content="Champu — your personal intelligence workspace.">
+  <title>Champu — Personal Intelligence</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Champu home">
+        <span class="brand-mark">C</span>
+        <span class="brand-name">champu<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="topbar-right">
+        <span class="status-dot"></span>
+        <span id="connection">Workspace ready</span>
+        <button id="voice-toggle" class="voice-toggle"
+          type="button" aria-pressed="true" title="Toggle spoken responses">
+          <span id="voice-icon">♫</span>
+          <span id="voice-label">Voice on</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="welcome" id="welcome">
+        <div class="orb-wrap" aria-hidden="true">
+          <div class="orb-ring ring-one"></div>
+          <div class="orb-ring ring-two"></div>
+          <div class="orb">
+            <div class="orb-core"></div>
+          </div>
+        </div>
+
+        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1>A little more clarity.<br><span>A lot more possibility.</span></h1>
+        <p class="subtitle">
+          Think through ideas, plan your next move, and bring your projects to life.
+        </p>
+
+        <div class="suggestions">
+          <button class="suggestion" data-prompt="Help me plan a coding project">
+            <span class="suggestion-icon">⌘</span>
+            <span><strong>Build something</strong><small>Plan a new project</small></span>
+            <span class="suggestion-arrow">↗</span>
+          </button>
+          <button class="suggestion" data-prompt="Help me understand a difficult topic">
+            <span class="suggestion-icon">✳</span>
+            <span><strong>Learn something</strong><small>Understand a concept</small></span>
+            <span class="suggestion-arrow">↗</span>
+          </button>
+          <button class="suggestion" data-prompt="Help me organize my priorities">
+            <span class="suggestion-icon">☷</span>
+            <span><strong>Find clarity</strong><small>Organize your thoughts</small></span>
+            <span class="suggestion-arrow">↗</span>
+          </button>
+          <button class="suggestion" data-prompt="Help me troubleshoot a coding error">
+            <span class="suggestion-icon">⌕</span>
+            <span><strong>Solve a problem</strong><small>Work through an issue</small></span>
+            <span class="suggestion-arrow">↗</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="conversation" class="conversation"
+        aria-label="Conversation" aria-live="polite" hidden>
+      </section>
+
+      <section class="composer">
+        <label for="prompt" class="sr-only">Message Champu</label>
+        <textarea id="prompt" rows="1" maxlength="4000"
+          placeholder="Tell me what's on your mind..."
+          enterkeyhint="send"></textarea>
+
+        <div class="composer-footer">
+          <span class="composer-hint">
+            <span class="hint-dot"></span> A space for your next idea
+          </span>
+          <div class="composer-actions">
+            <button id="stop-speaking" class="icon-button"
+              type="button" aria-label="Stop speaking" title="Stop voice"
+              hidden>■</button>
+            <button id="send" class="send-button"
+              type="button" aria-label="Send message">↑</button>
+          </div>
+        </div>
+      </section>
+
+      <p class="disclaimer" id="notice">
+        Your workspace is ready. Conversation intelligence will be configured next.
+      </p>
+    </main>
+
+    <footer>
+      <span>CHAMPU <span class="footer-dot">/</span> PERSONAL INTELLIGENCE</span>
+      <span>BUILT FOR YOUR WORKFLOW</span>
+    </footer>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
+
